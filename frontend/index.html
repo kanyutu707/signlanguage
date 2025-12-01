@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Language detector</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>THE MODEL RECOGNIZES</h2>
+        <ul>
+            <li>Church</li>
+            <li>Enough or Satisfied</li>
+            <li>Friend</li>
+            <li>Love</li>
+            <li>Me</li>
+            <li>Mosque</li>
+            <li>Seat</li>
+            <li>Temple</li>
+            <li>You</li>
+            
+        </ul>
+    </div>
+
+    <div class="container">
+        <h1>Kenyan Sign Language</h1>
+
+        <input type="file" id="fileInput" accept="image/*">
+
+        <button id="predictBtn">Predict</button>
+
+        <div id="preview"></div>
+
+        <h2 id="result"></h2>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
