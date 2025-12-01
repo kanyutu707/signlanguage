@@ -13,21 +13,30 @@ class NeuralNet(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.conv1=nn.Conv2d(3, 64, 5, 1)
-        self.pool=nn.MaxPool2d(2, 2)
-        self.conv2=nn.Conv2d(64, 128, 5, 1)
-        self.fc1=nn.Linear(128*53*53, 640)
-        self.fc2=nn.Linear(640, 90)
-        self.fc3=nn.Linear(90, 9)
+        self.conv1 = nn.Conv2d(3, 32, 5, 1)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(32, 64, 5, 1)
+
+        self.conv3 = nn.Conv2d(64, 128, 3, 1)
+
+        self.pool3 = nn.MaxPool2d(2, 2)
+
+        flattened_size = 128 * 25 * 25  # = 80,000
+
+        self.fc1 = nn.Linear(flattened_size, 256)
+        self.fc2 = nn.Linear(256, 64)
+        self.fc3 = nn.Linear(64, 9)
 
     def forward(self, x):
-        x=self.pool(F.relu(self.conv1(x)))
-        x=self.pool(F.relu(self.conv2(x)))
-        x=torch.flatten(x, 1)
-        x=F.relu(self.fc1(x))
-        x=F.relu(self.fc2(x))
-        x=self.fc3(x)
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool3(F.relu(self.conv3(x)))
+        x = torch.flatten(x, 1)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
         return x
+
     
 device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
