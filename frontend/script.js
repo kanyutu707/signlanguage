@@ -30,7 +30,7 @@ predictBtn.addEventListener("click", async () => {
 
     result.textContent = "Predicting...";
 
-    const res = await fetch("http://localhost:9020/predict", {
+    const res = await fetch("https://signlanguage-1-7cbh.onrender.com/predict", {
         method: "POST",
         body: formData,
     });
